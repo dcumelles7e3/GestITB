@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">GestITB</string>
+    <string name="name_title_text">NAME</string>
+    <string name="name_text_hint">Enter student\'s name here.</string>
+    <string name="details_title">DETAILS</string>
+    <string name="checkbox_text">Justified</string>
+    <string name="send_button_text">Add</string>
+    <string-array name="modules">
+        <item>M6 - Data access</item>
+        <item>M7 - Interface development</item>
+        <item>M8 - Mobile app development</item>
+        <item>M9 - Process and service programming</item>
+        <item>M15 - Complex environment</item>
+        <item>M16 - AI</item>
+    </string-array>
+</resources>

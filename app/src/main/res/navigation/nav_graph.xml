@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/missedAttendanceListFragment">
+
+    <fragment
+        android:id="@+id/missedAttendanceListFragment"
+        android:name="cat.itb.gestitb.MissedAttendanceListFragment"
+        android:label="MissedAttendanceListFragment" >
+        <action
+            android:id="@+id/action_List_to_Fragment"
+            app:destination="@id/missedAttendanceFragment"
+            app:enterAnim="@android:anim/fade_in" />
+    </fragment>
+    <fragment
+        android:id="@+id/missedAttendanceFragment"
+        android:name="cat.itb.gestitb.MissedAttendanceFragment"
+        android:label="MissedAttendanceFragment" >
+        <argument
+            android:name="missedAttendance"
+            app:argType="cat.itb.gestitb.MissedAttendance" />
+    </fragment>
+</navigation>
