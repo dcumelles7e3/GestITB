@@ -11,7 +11,8 @@ public class MissedAttendanceViewModel extends ViewModel {
     public MissedAttendanceViewModel() {
         for (int i = 0; i < 100; i++) {
             MissedAttendance missedAttendance = new MissedAttendance();
-            missedAttendance.setName("Ekisde " + i);
+            missedAttendance.setName("Student no." + i);
+            //Random subject
             int rand = (int) Math.floor(Math.random() * 6) + 1;
             switch (rand) {
                 case 1:
@@ -35,7 +36,9 @@ public class MissedAttendanceViewModel extends ViewModel {
                 default:
                     break;
             }
+            //Used for easy spinner setting on the fragment
             missedAttendance.setSubjNum(rand);
+            //For every 3 attendances 1 is justified
             if (Math.random()<0.33){
                 missedAttendance.setJustified(true);
             }

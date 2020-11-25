@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-
-
 public class MissedAttendanceAdapter extends RecyclerView.Adapter<MissedAttendanceAdapter.MissedAttendanceViewHolder> {
     List<MissedAttendance> missedAttendances;
 

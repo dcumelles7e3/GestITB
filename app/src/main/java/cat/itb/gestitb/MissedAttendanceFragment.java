@@ -1,6 +1,7 @@
 package cat.itb.gestitb;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -55,12 +56,10 @@ public class MissedAttendanceFragment extends Fragment {
         dateButton.setEnabled(false);
         dateButton.setText((new Date()).toString());
 
-
         if (getArguments() != null) missedAttendance = getArguments().getParcelable("missedAttendance");
         if (missedAttendance != null){
             nameText.setText(missedAttendance.getName());
-            moduleSpinner.setSelection(0);
-
+            moduleSpinner.setSelection(missedAttendance.getSubjNum()-1);
         }
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +72,15 @@ public class MissedAttendanceFragment extends Fragment {
                 msg += " on " + missedAttendance.date;
                 msg += missedAttendance.isJustified() ? " with justification" : " without justification";
                 builder.setMessage(msg);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        nameText.setText("");
+                        isJustified.setChecked(false);
+                        moduleSpinner.setSelection(0);
+                    }
+                });
                 builder.show();
             }
         });
@@ -86,7 +94,7 @@ public class MissedAttendanceFragment extends Fragment {
 
         //Set the new window details
         if (missedAttendance.isJustified()){isJustified.setChecked(true);}
-        moduleSpinner.setSelection(missedAttendance.getSubjNum()-1);
+
 
         nameText.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -95,7 +103,6 @@ public class MissedAttendanceFragment extends Fragment {
                 return false;
             }
         });
-
 
         moduleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
