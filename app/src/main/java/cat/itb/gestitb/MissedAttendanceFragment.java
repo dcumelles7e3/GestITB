@@ -21,6 +21,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+
 import java.util.Date;
 
 public class MissedAttendanceFragment extends Fragment {
@@ -40,7 +43,7 @@ public class MissedAttendanceFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.missed_attendance_fragment, container, false);
 
         nameText = view.findViewById(R.id.name_text);
@@ -53,8 +56,23 @@ public class MissedAttendanceFragment extends Fragment {
                 R.array.modules, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         moduleSpinner.setAdapter(adapter);
-        dateButton.setEnabled(false);
+//        dateButton.setEnabled(false);
         dateButton.setText((new Date()).toString());
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
+                builder.setTitleText("Data");
+                final MaterialDatePicker<Long> picker = builder.build();
+                picker.show(getParentFragmentManager(), picker.toString());
+                if (picker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
+                    @Override
+                    public void onPositiveButtonClick(Long selection) {
+                        dateButton.setText(String.valueOf(picker.getHeaderText()));
+                    }
+                }));
+            }
+        });
 
         if (getArguments() != null) missedAttendance = getArguments().getParcelable("missedAttendance");
         if (missedAttendance != null){
